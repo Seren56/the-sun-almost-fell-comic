@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Day the Sun Almost Fell - Comic Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .comic-container {
+      max-width: 800px;
+      text-align: center;
+      padding: 1rem;
+    }
+    .comic-image {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #ffaa00aa;
+    }
+    .caption {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+    audio {
+      margin-top: 1rem;
+      width: 100%;
+    }
+    .nav-buttons {
+      margin-top: 2rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      font-size: 1rem;
+      background: #ffaa00;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="comic-container">
+    <img id="comic-img" src="assets/sample.jpg" alt="Comic Scene" class="comic-image" />
+    <div class="caption" id="caption">Chapter 1: Seren and Jack's final moments together; the slow farewell.</div>
+    <audio id="audio" controls>
+      <source src="assets/sample.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+    <div class="nav-buttons">
+      <button onclick="prevChapter()">← Previous</button>
+      <button onclick="nextChapter()">Next →</button>
+    </div>
+  </div>
+
+  <script>
+    const chapters = [
+      {
+        image: "assets/sample.jpg",
+        caption: "Chapter 1: Seren and Jack's final moments together; the slow farewell.",
+        audio: "assets/sample.mp3"
+      },
+      {
+        image: "assets/sample.jpg",
+        caption: "Chapter 2: Mourning. Seren withdraws. The stars remain indifferent.",
+        audio: "assets/sample.mp3"
+      }
+    ];
+    let current = 0;
+    function updateScene() {
+      const chapter = chapters[current];
+      document.getElementById('comic-img').src = chapter.image;
+      document.getElementById('caption').textContent = chapter.caption;
+      const audio = document.getElementById('audio');
+      audio.src = chapter.audio;
+      audio.load();
+    }
+    function prevChapter() {
+      if (current > 0) { current--; updateScene(); }
+    }
+    function nextChapter() {
+      if (current < chapters.length - 1) { current++; updateScene(); }
+    }
+  </script>
+</body>
+</html>
